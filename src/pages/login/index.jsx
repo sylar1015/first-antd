@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Form, Input, Button} from 'antd';
 
 export default function Login () {
@@ -18,9 +18,12 @@ export default function Login () {
                     <Input></Input>
                 </Form.Item>
 
-                <Button>
-                    登录
-                </Button>
+                <Form.Item>
+                    <Button>
+                        登录
+                    </Button>
+                </Form.Item>
+                
             </Form>
         </>
     )
