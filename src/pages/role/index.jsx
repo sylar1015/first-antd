@@ -2,6 +2,6 @@ import React from 'react';
 
 export default () => (
     <>
-        <div>manage</div>
+        <div>角色管理</div>
     </>
 );

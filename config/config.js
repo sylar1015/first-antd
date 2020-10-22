@@ -25,13 +25,12 @@ export default defineConfig({
   // umi routes: https://umijs.org/docs/routing
   routes: [
     {
-      path: '/user',
-      component: '../layouts/UserLayout',
+      path: '/login',
       routes: [
         {
           name: 'login',
-          path: '/user/login',
-          component: './user/login',
+          path: '/login',
+          component: './login',
         },
       ],
     },
@@ -46,36 +45,31 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/welcome',
+              redirect: '/manage/user',
             },
             {
-              path: '/welcome',
-              name: 'welcome',
-              icon: 'smile',
-              component: './Welcome',
-            },
-            {
-              path: '/admin',
-              name: 'admin',
-              icon: 'crown',
-              component: './Admin',
-              authority: ['admin'],
+              path: '/manage',
+              name: '系统管理',
+              icon: 'setting',
               routes: [
                 {
-                  path: '/admin/sub-page',
-                  name: 'sub-page',
-                  icon: 'smile',
-                  component: './Welcome',
-                  authority: ['admin'],
+                  path: '/manage/user',
+                  name: '用户管理',
+                  component: './user',
                 },
-              ],
+                {
+                  path: '/manage/company',
+                  name: '企业管理',
+                  component: './company',
+                },
+                {
+                  path: '/manage/role',
+                  name: '角色管理',
+                  component: './role',
+                },
+              ]
             },
-            {
-              name: 'list.table-list',
-              icon: 'table',
-              path: '/list',
-              component: './ListTableList',
-            },
+            
             {
               component: './404',
             },
