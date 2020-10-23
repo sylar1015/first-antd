@@ -68,9 +68,9 @@ export default defineConfig({
                   name: '角色管理',
                   component: './role',
                 },
-              ]
+              ],
             },
-            
+
             {
               component: './404',
             },

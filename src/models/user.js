@@ -1,5 +1,5 @@
 import { query as queryUsers } from '@/services/user';
-import {getLoginName, getNickName, getUserId} from '@/utils/utils';
+import { getLoginName, getNickName, getUserId } from '@/utils/utils';
 
 const UserModel = {
   namespace: 'user',
@@ -17,9 +17,9 @@ const UserModel = {
 
     *fetchCurrent(_, { call, put }) {
       const response = {
-        'name': getLoginName(),
-        'nickName': getNickName(),
-        'id': getUserId(),
+        name: getLoginName(),
+        nickName: getNickName(),
+        id: getUserId(),
       };
       yield put({
         type: 'saveCurrentUser',

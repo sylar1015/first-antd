@@ -1,8 +1,8 @@
 import { stringify } from 'querystring';
 import { history } from 'umi';
 import { getPageQuery } from '@/utils/utils';
-import {setUserId, setNickName, setLoginName} from '@/utils/utils';
-import {accountLogin} from '@/services/login';
+import { setUserId, setNickName, setLoginName } from '@/utils/utils';
+import { accountLogin } from '@/services/login';
 
 const Model = {
   namespace: 'login',
@@ -14,12 +14,11 @@ const Model = {
       try {
         const response = yield call(accountLogin, payload);
 
-        const {id, name, nickName} = response.result;
+        const { id, name, nickName } = response.result;
         yield put({
           type: 'changeLoginStatus',
-          payload: {id, name, nickName},
+          payload: { id, name, nickName },
         }); // Login successfully
-        
 
         setUserId(id);
         setLoginName(name);
@@ -34,7 +33,7 @@ const Model = {
           payload: {
             id: '',
             name: '',
-            nickName: ''
+            nickName: '',
           },
         });
         return false;
@@ -42,7 +41,6 @@ const Model = {
     },
 
     logout() {
-
       sessionStorage.clear();
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
 

@@ -25,45 +25,44 @@ export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 
 export const getUserId = () => {
   return '' || sessionStorage.getItem('userId');
-}
+};
 
 export const setUserId = (userId) => {
   sessionStorage.setItem('userId', userId);
-}
+};
 
 export const getNickName = () => {
   return '' || sessionStorage.getItem('nickName');
-}
+};
 
 export const setNickName = (nickName) => {
   sessionStorage.setItem('nickName', nickName);
-}
+};
 
 export const setLoginName = (loginName) => {
   sessionStorage.setItem('loginName', loginName);
-}
+};
 
 export const getLoginName = () => {
   return sessionStorage.getItem('loginName');
-}
+};
 
 export const formatParams = (model, action, params) => {
   return {
-    head:{
+    head: {
       model,
       action,
-      userId: getUserId()
+      userId: getUserId(),
     },
-    body:params
-  }
-}
+    body: params,
+  };
+};
 
 export const formatRequest = (model, action, params) => {
   const data = formatParams(model, action, params);
 
-  return request('/api/route',
-    {
-      method: 'POST',
-      data
-    });
-}
+  return request('/api/route', {
+    method: 'POST',
+    data,
+  });
+};

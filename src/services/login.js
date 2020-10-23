@@ -1,15 +1,13 @@
-import {formatParams, formatRequest} from '@/utils/utils';
-import {loginRequest} from '@/utils/request';
+import { formatParams, formatRequest } from '@/utils/utils';
+import { loginRequest } from '@/utils/request';
 
 export async function accountLogin(params) {
-
   const data = formatParams('userService', 'login', params);
 
-  return loginRequest('/api/route',
-    {
-      method: 'POST',
-      data
-    });
+  return loginRequest('/api/route', {
+    method: 'POST',
+    data,
+  });
 }
 
 export async function getUserMenuList(parmas) {
