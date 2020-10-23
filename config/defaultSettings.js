@@ -8,7 +8,7 @@ const proSettings = {
   fixSiderbar: true,
   colorWeak: false,
   menu: {
-    locale: true,
+    locale: false,
   },
   title: '报表系统',
   pwa: false,

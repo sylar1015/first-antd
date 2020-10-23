@@ -53,4 +53,20 @@ const request = extend({
   // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
 });
+
+request.use(async (ctx, next) => {
+  await next();
+  const { res } = ctx;
+  if (res.code != 200) {
+    // 对异常情况做对应处理
+    throw res;
+  }
+});
+
+export const loginRequest = extend({
+  errorHandler,
+  // 默认错误处理
+  credentials: 'include', // 默认请求是否带上cookie
+});
+
 export default request;

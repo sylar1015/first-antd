@@ -1,63 +1,21 @@
-import { stringify } from 'querystring';
-import { history } from 'umi';
-import { fakeAccountLogin } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
-import { getPageQuery } from '@/utils/utils';
-const Model = {
-  namespace: 'login',
-  state: {
-    status: undefined,
-  },
-  effects: {
-    *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      }); // Login successfully
+import {formatParams, formatRequest} from '@/utils/utils';
+import {loginRequest} from '@/utils/request';
 
-      if (response.status === 'ok') {
-        const urlParams = new URL(window.location.href);
-        const params = getPageQuery();
-        let { redirect } = params;
+export async function accountLogin(params) {
 
-        if (redirect) {
-          const redirectUrlParams = new URL(redirect);
+  const data = formatParams('userService', 'login', params);
 
-          if (redirectUrlParams.origin === urlParams.origin) {
-            redirect = redirect.substr(urlParams.origin.length);
+  return loginRequest('/api/route',
+    {
+      method: 'POST',
+      data
+    });
+}
 
-            if (redirect.match(/^\/.*#/)) {
-              redirect = redirect.substr(redirect.indexOf('#') + 1);
-            }
-          } else {
-            window.location.href = '/';
-            return;
-          }
-        }
+export async function getUserMenuList(parmas) {
+  return formatRequest('userService', 'getUserMenuList', params);
+}
 
-        history.replace(redirect || '/');
-      }
-    },
-
-    logout() {
-      const { redirect } = getPageQuery(); // Note: There may be security issues, please note
-
-      if (window.location.pathname !== '/user/login' && !redirect) {
-        history.replace({
-          pathname: '/user/login',
-          search: stringify({
-            redirect: window.location.href,
-          }),
-        });
-      }
-    },
-  },
-  reducers: {
-    changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
-      return { ...state, status: payload.status, type: payload.type };
-    },
-  },
-};
-export default Model;
+export async function getPowerListByUserId(params) {
+  return formatRequest('userService', 'getPowerListByUserId', params);
+}

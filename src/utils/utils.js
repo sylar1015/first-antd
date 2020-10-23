@@ -39,6 +39,14 @@ export const setNickName = (nickName) => {
   sessionStorage.setItem('nickName', nickName);
 }
 
+export const setLoginName = (loginName) => {
+  sessionStorage.setItem('loginName', loginName);
+}
+
+export const getLoginName = () => {
+  return sessionStorage.getItem('loginName');
+}
+
 export const formatParams = (model, action, params) => {
   return {
     head:{
@@ -52,6 +60,7 @@ export const formatParams = (model, action, params) => {
 
 export const formatRequest = (model, action, params) => {
   const data = formatParams(model, action, params);
+
   return request('/api/route',
     {
       method: 'POST',

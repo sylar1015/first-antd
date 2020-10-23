@@ -1,25 +1,51 @@
 import React from 'react';
 import {Form, Input, Button} from 'antd';
+import {connect} from 'umi';
+import {Alert} from 'antd';
 
-export default function Login () {
+const LoginMessage = ({content}) => {
+    return (
+        <Alert
+            message={content}
+            type="error"
+            showIcon>
+        </Alert>
+    )
+}
 
-    const onFinish = () => {
-        
+function Login (props) {
+
+    const {dispatch, userId} = props;
+
+    const onFinish = (value) => {
+        if (dispatch) {
+
+            dispatch(
+                {
+                    type:"login/login",
+                    payload: value
+                }
+            )
+        }
     }
 
     return (
         <>
             <Form onFinish={onFinish}>
-                <Form.Item>
+                <Form.Item name="name">
                     <Input></Input>                    
                 </Form.Item>
 
-                <Form.Item>
+                <Form.Item name="pwd">
                     <Input></Input>
                 </Form.Item>
 
+                    {
+                       userId === '' && (<LoginMessage content="帐号密码错误"></LoginMessage>)
+                    }
+
                 <Form.Item>
-                    <Button>
+                    <Button type="primary" htmlType="submit">
                         登录
                     </Button>
                 </Form.Item>
@@ -28,3 +54,15 @@ export default function Login () {
         </>
     )
 }
+
+const mapState2Props = ({login}) => {
+
+    const {id, nickName, name} = login;
+    return {
+        userId: id,
+        nickName,
+        loginName: name
+    }
+}
+
+export default connect(mapState2Props)(Login);
